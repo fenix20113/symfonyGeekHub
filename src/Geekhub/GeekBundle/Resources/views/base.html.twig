@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <meta charset="UTF-8"/>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% block stylesheets %}
+        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/geekhub/css/style.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/geekhub/css/bootstrap.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('bundles/geekhub/css/bootstrap-theme.css') }}"/>
+    {% endblock %}
+
+    {% block javascript %}
+        <script src="{{ asset('bundles/geekhub/js/bootstrap.js') }}"></script>
+    {% endblock %}
+</head>
+<body>
+{% block body %}
+    {% for flashMessage in app.session.flashbag.get('notice') %}
+        <div class="flash-message">
+            <em>Notice</em>: {{ flashMessage }}
+        </div>
+    {% endfor %}
+<div class="navbar-header">
+    {% block content_header %}
+        <ul id="menu" class="nav">
+
+            <li ><a  class="navbar-btn"  href="{{ path('_geek') }}">Home</a></li>
+
+        </ul>
+
+        <div style="clear: both"></div>
+    {% endblock %}
+
+</div>
+    <div class="block container">
+        {% block content %}{% endblock %}
+    </div>
+    <div class="block footer modal-footer navbar-fixed-bottom">
+        {% block footer %}{% endblock %}
+    </div>
+
+    {% if code is defined %}
+        <h2>Code behind this page</h2>
+        <div class="block">
+            <div class="symfony-content">{{ code|raw }}</div>
+        </div>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

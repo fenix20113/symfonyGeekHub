@@ -1,0 +1,11 @@
+{% extends 'GeekhubGeekBundle::base.html.twig' %}
+
+
+{% block title %}Symfony - My first custom bundle{% endblock %}
+
+{% block content %}
+    {% set version = constant('Symfony\\Component\\HttpKernel\\Kernel::MAJOR_VERSION') ~ '.' ~ constant('Symfony\\Component\\HttpKernel\\Kernel::MINOR_VERSION')%}
+
+    <h1>Hello {{ name }}!</h1>
+
+{% endblock %}
