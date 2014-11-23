@@ -1,0 +1,43 @@
+{% extends 'GeekhubGeekBundle::base.html.twig' %}
+
+{% block title %}Symfony - My first custom bundle{% endblock %}
+
+  {% block content_header %}
+      <h2>Wall</h2>
+  {% endblock %}
+
+{% block content %}
+
+    <div class="add_post">
+        <a class="btn btn-primary" href="{{ path('_createArticle') }}">
+            <i class="glyphicon glyphicon-pencil"></i>
+            Add post
+        </a>
+    </div>
+
+    {% if data is empty %}
+        <p class="alert alert-info">No posts here...</p>
+    {% else %}
+
+        {% for article in data %}
+            <div>
+                <h2>{{ article.title|trim|title }}</h2>
+
+                <p>{{ article.text|trim|capitalize }}</p>
+
+                <div>
+
+                    <span class="created">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        {{ article.created|date('d.m.Y H:i') }}
+                    </span>
+
+                    <a href="{{ path('_deleteArticle', { 'id': article.id }) }}">Delete</a>
+
+                </div>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
+{% endblock %}

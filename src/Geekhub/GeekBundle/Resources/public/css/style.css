@@ -1,0 +1,24 @@
+.label span {
+    padding-right: 5px;
+}
+
+.created {
+    display: inline-block;
+    line-height: 19px;
+    font-size: 90%;
+    height: 19px;
+}
+
+.block.container {
+    overflow: hidden;
+}
+
+.page-header #header-container {
+    width: 970px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+.add_post {
+    margin-bottom: 20px;
+}

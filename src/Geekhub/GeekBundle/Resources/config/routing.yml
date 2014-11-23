@@ -1,3 +1,13 @@
-_geek:
-    path:     /{name}
-    defaults: { _controller: GeekhubGeekBundle:Geek:index, name:Geek }
+
+_articles:
+    path:     /articles
+    defaults: { _controller: GeekhubGeekBundle:Articles:show }
+
+_createArticle:
+    path:     /article/create
+    defaults: { _controller: GeekhubGeekBundle:Articles:create }
+
+_deleteArticle:
+    path:     /article/{id}/delete
+    defaults: { _controller: GeekhubGeekBundle:Articles:delete}
+
