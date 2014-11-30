@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  *  @ORM\Index(name="article_idx", columns={"id"})
  * })
  */
-class Articles
+class Article
 {
     /**
      * @ORM\Id
@@ -52,7 +52,7 @@ class Articles
      * Set title
      *
      * @param string $title
-     * @return Articles
+     * @return Article
      */
     public function setTitle($title)
     {
@@ -98,7 +98,7 @@ class Articles
      * Set created
      *
      * @param \DateTime $created
-     * @return Articles
+     * @return Article
      */
     public function setCreated($created)
     {
