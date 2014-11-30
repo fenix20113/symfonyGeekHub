@@ -14,30 +14,32 @@
             Add post
         </a>
     </div>
+    <div id="posts_list">
 
-    {% if data is empty %}
-        <p class="alert alert-info">No posts here...</p>
-    {% else %}
+        {% if data is empty %}
+            <p class="alert alert-info">No posts here...</p>
+        {% else %}
 
-        {% for article in data %}
-            <div>
-                <h2>{{ article.title|trim|title }}</h2>
-
-                <p>{{ article.text|trim|capitalize }}</p>
-
+            {% for article in data %}
                 <div>
+                    <a href="{{ path('_article', { 'id': article.id }) }}">
+                        <h2>{{ article.title|trim|title }}</h2>
+                    </a>
+
+                    <p>{{ article.text|trim|capitalize }}</p>
+
+                    <div>
 
                     <span class="created">
                         <i class="glyphicon glyphicon-calendar"></i>
                         {{ article.created|date('d.m.Y H:i') }}
                     </span>
 
-                    <a href="{{ path('_deleteArticle', { 'id': article.id }) }}">Delete</a>
-
+                    </div>
                 </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
 
-    {% endif %}
+        {% endif %}
+    </div>
 
 {% endblock %}

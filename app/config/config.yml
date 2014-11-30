@@ -70,6 +70,10 @@ assetic:
         inputs:
           - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.woff
         output: "fonts/glyphicons-halflings-regular.woff"
+      bootstrap_theme_map:
+        inputs:
+          - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap-theme.css.map
+        output: "css/bootstrap-theme.css.map"
 
 # Doctrine Configuration
 doctrine:
