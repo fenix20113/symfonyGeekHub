@@ -7,15 +7,19 @@
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
     {% block stylesheets %}
-        <link rel="icon" sizes="16x16" href="{{ asset('favicon.ico') }}"/>
-        <link rel="stylesheet" href="{{ asset('bundles/geekhubgeek/css/style.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('bundles/geekhubgeek/css/bootstrap.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('bundles/geekhubgeek/css/bootstrap-theme.css') }}"/>
+        {% stylesheets
+        '@bootstrap_css'
+        'bundles/geekhubgeek/css/style.css' %}
+        <link href="{{ asset_url }}" rel="stylesheet" type="text/css"/>
+        {% endstylesheets %}
     {% endblock %}
 
     {% block javascript %}
-        <script src="{{ asset('bundles/geekhubgeek/js/jquery-1.11.1.min.js') }}"></script>
-        <script src="{{ asset('bundles/geekhubgeek/js/bootstrap.js') }}"></script>
+        {% javascripts
+        '@jquery'
+        '@bootstrap_js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     {% endblock %}
 </head>
 <body>
