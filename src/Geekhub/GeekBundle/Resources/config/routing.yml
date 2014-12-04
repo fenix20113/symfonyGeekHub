@@ -8,7 +8,7 @@ _article:
     defaults: { _controller: GeekhubGeekBundle:Article:show }
 
 _createArticle:
-    path:     /articles/create
+    path:     /create/article
     defaults: { _controller: GeekhubGeekBundle:Article:create }
 
 _deleteArticle:

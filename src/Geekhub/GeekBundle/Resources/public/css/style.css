@@ -48,6 +48,10 @@ input {
 
 }
 
+#form_save {
+    margin-top: 15px;
+}
+
 .user {
     font-style: italic;
 }

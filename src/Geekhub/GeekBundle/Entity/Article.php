@@ -40,7 +40,7 @@ class Article
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
      */
     protected $comments;
 
