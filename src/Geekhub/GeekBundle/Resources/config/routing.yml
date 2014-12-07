@@ -11,6 +11,10 @@ _createArticle:
     path:     /create/article
     defaults: { _controller: GeekhubGeekBundle:Article:create }
 
+_editArticle:
+    path:     /article/{id}/edit
+    defaults: { _controller: GeekhubGeekBundle:Article:update}
+
 _deleteArticle:
     path:     /article/{id}/delete
     defaults: { _controller: GeekhubGeekBundle:Article:delete}

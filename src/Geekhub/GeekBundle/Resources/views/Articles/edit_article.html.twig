@@ -1,0 +1,43 @@
+{% extends 'GeekhubGeekBundle::base.html.twig' %}
+
+{% block title %}Symfony - Edit Article{% endblock %}
+
+{% block content %}
+
+    <a href="{{ path('_articles') }}">
+        <h2>Go to all posts</h2>
+    </a>
+
+    <div id="edit-article">
+
+        <div>
+
+            {{ form_start(form , {'attr' : {'novalidate' : 'novalidate' }}) }}
+
+            {% if not form.vars.valid %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span
+                                aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    {{ form_errors(form.title) }}
+                    {{ form_errors(form.text) }}
+                </div>
+            {% endif %}
+
+            <div>
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title , {'attr' : {'class' : 'form-control input-lg input' }}) }}
+            </div>
+            <div>
+                {{ form_label(form.text) }}
+                {{ form_widget(form.text , {'attr' : {'class' : 'form-control input-lg' }}) }}
+            </div>
+
+            {{ form_row(form.save , {'attr' : {'class' : 'btn btn-primary' }}) }}
+            {{ form_end(form) }}
+
+        </div>
+
+    </div>
+
+{% endblock %}

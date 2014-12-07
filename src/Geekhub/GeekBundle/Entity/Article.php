@@ -4,6 +4,8 @@ namespace Geekhub\GeekBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -21,22 +23,35 @@ class Article
      */
     protected $id;
 
-
     /**
+     * @Assert\NotBlank(message="Title field should be not blank!")
      * @ORM\Column (type="string", length=255)
      */
     protected $title;
 
     /**
+     * @Assert\NotBlank(message="Text field should be not blank!")
      * @ORM\Column (type="text")
      */
     protected $text;
 
 
     /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column (type="datetime")
      */
     protected $created;
+
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
 
 
     /**
@@ -106,19 +121,6 @@ class Article
     }
 
     /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Article
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
      * Get created
      *
      * @return \DateTime 
@@ -126,6 +128,16 @@ class Article
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace Geekhub\GeekBundle\Controller;
 
 use Geekhub\GeekBundle\Entity\Comment;
+use Geekhub\GeekBundle\Form\Type\ArticleType;
+use Geekhub\GeekBundle\Form\Type\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,20 +18,54 @@ class ArticleController extends Controller
 {
 
     /**
-     * @return Response
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function createAction()
+    public function createAction(Request $request)
     {
-        $articles = new Article();
-        $articles->setTitle('post title');
-        $articles->setCreated(new \DateTime(date('Y-m-d H:i:s')));
-        $articles->setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+        $article = new Article();
+        $form = $this->createForm(new ArticleType(), $article);
+        $form->handleRequest($request);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($articles);
-        $em->flush();
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
 
-        return $this->redirect($this->generateUrl('_articles'));
+            return $this->redirect($this->generateUrl('_articles'));
+        }
+
+        return $this->render("GeekhubGeekBundle:Articles:edit_article.html.twig" , [
+            'form' => $form->createView(),
+        ]);
+
+    }
+
+    /**
+     * @param $id
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     */
+    public function updateAction(Request $request, $id)
+    {
+
+        $repository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Article');
+        $article = $repository->find($id);
+        $form = $this->createForm(new ArticleType(), $article);
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($article);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('_articles'));
+        }
+
+        return $this->render("GeekhubGeekBundle:Articles:edit_article.html.twig" , [
+            'form' => $form->createView(),
+        ]);
+
     }
 
 
@@ -60,18 +96,11 @@ class ArticleController extends Controller
         $commentsRepository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Comment');
         $comments = $commentsRepository->findCommentForArticle($article);
 
-
         $comment = new Comment();
-        $form = $this->createFormBuilder($comment)
-            ->add('body', 'textarea', ['label' => 'Comment'])
-            ->add('mail', 'text', ['label' => 'Email'])
-            ->add('save', 'submit', ['label' => 'Add a comment',])
-            ->getForm();
-
+        $form = $this->createForm( new CommentType(), $comment);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $comment->setCreated(new \DateTime(date('Y-m-d H:i:s')));
             $comment->setArticle($article);
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
@@ -86,5 +115,4 @@ class ArticleController extends Controller
         ]);
     }
 
-
-} 
+}
