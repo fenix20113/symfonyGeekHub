@@ -13,6 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="articles", indexes={
  *  @ORM\Index(name="article_idx", columns={"id"})
  * })
+ *
+ * @Gedmo\SoftDeleteable(fieldName="deleted", timeAware=false)
  */
 class Article
 {
@@ -61,6 +63,11 @@ class Article
     protected $slug;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $deleted;
+
+    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
      */
     protected $comments;
@@ -79,6 +86,18 @@ class Article
     {
         return $this->id;
     }
+
+
+    public function getDeleted()
+    {
+        $this->deleted;
+    }
+
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+    }
+
 
     /**
      * Get slug
