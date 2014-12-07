@@ -22,7 +22,8 @@
                     </span>
 
                 <a href="{{ path('_editArticle', { 'slug': data.slug }) }}">Edit</a>
-                <a href="{{ path('_deleteArticle', { 'slug': data.slug }) }}" onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>Delete</a>
+                <a href="{{ path('_deleteArticle', { 'slug': data.slug }) }}"
+                   onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>Delete</a>
 
             </div>
 
@@ -35,17 +36,20 @@
                                 class="sr-only">Close</span></button>
                     {{ form_errors(form.mail) }}
                     {{ form_errors(form.body) }}
+
                 </div>
             {% endif %}
 
-            <div>
-                {{ form_label(form.mail) }}
-                {{ form_widget(form.mail , {'attr' : {'class' : 'form-control input-lg input' }}) }}
+            <div class="{% if not form.mail.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.mail, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
+                {{ form_widget(form.mail , {'attr' : {'class' : ' form-control input-lg input' }}) }}
             </div>
-            <div>
-                {{ form_label(form.body) }}
+
+            <div class="{% if not form.body.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.mail, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
                 {{ form_widget(form.body , {'attr' : {'class' : 'form-control input-lg' }}) }}
             </div>
+
             {{ form_row(form.save , {'attr' : {'class' : 'btn btn-primary' }}) }}
             {{ form_end(form) }}
 

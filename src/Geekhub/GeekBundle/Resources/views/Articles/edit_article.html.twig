@@ -24,12 +24,13 @@
                 </div>
             {% endif %}
 
-            <div>
-                {{ form_label(form.title) }}
+            <div class="{% if not form.title.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.title, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
                 {{ form_widget(form.title , {'attr' : {'class' : 'form-control input-lg input' }}) }}
             </div>
-            <div>
-                {{ form_label(form.text) }}
+
+            <div class="{% if not form.text.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.text, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
                 {{ form_widget(form.text , {'attr' : {'class' : 'form-control input-lg' }}) }}
             </div>
 
