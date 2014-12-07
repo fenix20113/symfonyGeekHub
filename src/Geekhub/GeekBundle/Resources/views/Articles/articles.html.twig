@@ -22,7 +22,7 @@
 
             {% for article in data %}
                 <div>
-                    <a href="{{ path('_article', { 'id': article.id }) }}">
+                    <a href="{{ path('_article', { 'slug': article.slug }) }}">
                         <h2>{{ article.title|trim|title }}</h2>
                     </a>
 

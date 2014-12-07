@@ -21,8 +21,8 @@
                         {{ data.created|date('d.m.Y H:i') }}
                     </span>
 
-                <a href="{{ path('_editArticle', { 'id': data.id }) }}">Edit</a>
-                <a href="{{ path('_deleteArticle', { 'id': data.id }) }}" onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>Delete</a>
+                <a href="{{ path('_editArticle', { 'slug': data.slug }) }}">Edit</a>
+                <a href="{{ path('_deleteArticle', { 'slug': data.slug }) }}" onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>Delete</a>
 
             </div>
 

@@ -55,6 +55,12 @@ class Article
 
 
     /**
+     * @Gedmo\Slug(fields={"title"}, separator="-")
+     * @ORM\Column(length=128, unique=true)
+     */
+    protected $slug;
+
+    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
      */
     protected $comments;
@@ -72,6 +78,16 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**

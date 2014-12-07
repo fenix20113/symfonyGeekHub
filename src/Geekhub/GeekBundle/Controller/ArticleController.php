@@ -32,6 +32,7 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add('notice','The item has been created successfully!');
             return $this->redirect($this->generateUrl('_articles'));
         }
 
@@ -42,15 +43,15 @@ class ArticleController extends Controller
     }
 
     /**
-     * @param $id
+     * @param $slug
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $slug)
     {
 
         $repository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Article');
-        $article = $repository->find($id);
+        $article = $repository->findOneBySlug($slug);
         $form = $this->createForm(new ArticleType(), $article);
         $form->handleRequest($request);
 
@@ -58,6 +59,7 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
+            $this->get('session')->getFlashBag()->add('notice','The item has been updated successfully!');
 
             return $this->redirect($this->generateUrl('_articles'));
         }
@@ -70,28 +72,29 @@ class ArticleController extends Controller
 
 
     /**
-     * @param $id
+     * @param $slug
      * @return Response
      */
-    public function deleteAction($id)
+    public function deleteAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $article = $em->getRepository('GeekhubGeekBundle:Article')->find($id);
+        $article = $em->getRepository('GeekhubGeekBundle:Article')->findOneBySlug($slug);
         $em->remove($article);
         $em->flush();
 
+        $this->get('session')->getFlashBag()->add('notice','The item "' . $article->getTitle() . '" has been removed successfully!');
         return $this->redirect($this->generateUrl('_articles'));
     }
 
     /**
      * @param Request $request
-     * @param $id
+     * @param $slug
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function showAction(Request $request, $id)
+    public function showAction(Request $request, $slug)
     {
         $repository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Article');
-        $article = $repository->find($id);
+        $article = $repository->findOneBySlug($slug);
 
         $commentsRepository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Comment');
         $comments = $commentsRepository->findCommentForArticle($article);
@@ -105,7 +108,7 @@ class ArticleController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($comment);
             $em->flush();
-            return $this->redirect($this->generateUrl('_article', ['id' => $id]));
+            return $this->redirect($this->generateUrl('_article', ['slug' => $slug]));
         }
 
         return $this->render('GeekhubGeekBundle:Articles:article.html.twig', [
