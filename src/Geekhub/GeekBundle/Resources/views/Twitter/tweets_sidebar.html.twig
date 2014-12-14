@@ -1,0 +1,29 @@
+<div id="latest-tweets" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="caption text-center panel-title">Latest Tweets</h3>
+    </div>
+
+    <ul class="list-group">
+        {% if tweets is not empty %}
+
+            {% for tweet in tweets %}
+                <li class="list-group-item">
+                    <div class="list-group-item-heading">
+                        <img class="profile-image" src="{{ tweet.user.profile_image_url_https }}">
+                        <a class="twitter-user" href="{{ tweet.user.url }}" target="_blank">{{ tweet.user.name }}</a>
+                        <span class="screen-name">@{{ tweet.user.screen_name }}</span>
+                        <span class="date">{{ tweet.created_at|date("M d") }}</span>
+                    </div>
+                    <div class="text-left">{{ tweet.text|converturls }}</div>
+                </li>
+            {% endfor %}
+
+        {% else %}
+            <div>No tweets...</div>
+        {% endif %}
+    </ul>
+</div>
+
+
+
+

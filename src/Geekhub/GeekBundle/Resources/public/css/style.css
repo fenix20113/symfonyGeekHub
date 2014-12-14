@@ -69,3 +69,18 @@ form div {
 .user {
     font-style: italic;
 }
+
+#latest-tweets .profile-image{
+    width: 20px;
+    height: 20px;
+}
+
+#latest-tweets .screen-name:after{
+    content: '‏ · ';
+}
+
+#latest-tweets .screen-name,
+#latest-tweets .date {
+    color: #8899a6;
+    font-size: 13px;
+}

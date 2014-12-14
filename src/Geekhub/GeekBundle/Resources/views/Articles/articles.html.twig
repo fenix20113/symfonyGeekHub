@@ -6,40 +6,52 @@
       <h2>Wall</h2>
   {% endblock %}
 
-{% block content %}
+    {% block content %}
 
-    <div class="add_post">
-        <a class="btn btn-primary" href="{{ path('_createArticle') }}">
-            <i class="glyphicon glyphicon-pencil"></i>
-            Add post
-        </a>
-    </div>
-    <div id="posts_list">
+        <div class="add_post">
+            <a class="btn btn-primary" href="{{ path('_createArticle') }}">
+                <i class="glyphicon glyphicon-pencil"></i>
+                Add post
+            </a>
+        </div>
 
-        {% if data is empty %}
-            <p class="alert alert-info">No posts here...</p>
-        {% else %}
+        <div id="main" class="col-lg-8">
+            <div id="posts_list">
 
-            {% for article in data %}
-                <div>
-                    <a href="{{ path('_article', { 'slug': article.slug }) }}">
-                        <h2>{{ article.title|trim|title }}</h2>
-                    </a>
+                {% if data is empty %}
+                    <p class="alert alert-info">No posts here...</p>
+                {% else %}
 
-                    <p>{{ article.text|trim|capitalize }}</p>
+                    {% for article in data %}
+                        <div>
+                            <a href="{{ path('_article', { 'slug': article.slug }) }}">
+                                <h2>{{ article.title|trim|title }}</h2>
+                            </a>
 
-                    <div>
+                            <p>{{ article.text|trim|capitalize }}</p>
 
-                    <span class="created">
-                        <i class="glyphicon glyphicon-calendar"></i>
-                        {{ article.created|date('d.m.Y H:i') }}
-                    </span>
+                            <div>
 
-                    </div>
-                </div>
-            {% endfor %}
+                            <span class="created">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                                {{ article.created|date('d.m.Y H:i') }}
+                            </span>
 
-        {% endif %}
-    </div>
+                            </div>
 
-{% endblock %}
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+            </div>
+        </div>
+
+        <div id="right-sidebar" class="col-lg-4">
+            {% block RightSidebar %}
+                {{ render(controller(
+               'GeekhubGeekBundle:Tweets:show'
+                )) }}
+            {% endblock %}
+        </div>
+
+    {% endblock %}
