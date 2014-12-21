@@ -24,7 +24,7 @@ class ArticleController extends Controller
     public function createAction(Request $request)
     {
         $article = new Article();
-        $form = $this->createForm(new ArticleType(), $article);
+        $form = $this->createForm($this->get('geekhub.form.type.article'), $article);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
