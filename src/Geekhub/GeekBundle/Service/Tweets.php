@@ -18,7 +18,7 @@ class Tweets
 
     public function __construct($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit)
     {
-        $this->tweets = $this->Tweets($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit);
+        $this->tweets = $this->showTweets($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit);
     }
 
     /**
@@ -30,7 +30,7 @@ class Tweets
      * @return mixed
      * @throws \Exception
      */
-    private function Tweets($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit = 5)
+    private function showTweets($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit = 5)
     {
 
         $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
