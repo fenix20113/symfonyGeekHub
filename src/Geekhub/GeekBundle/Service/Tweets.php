@@ -16,25 +16,33 @@ class Tweets
      */
     protected $tweets = [];
 
-    public function __construct($settings, $limit)
+    public function __construct($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit)
     {
-        $this->tweets = $this->Tweets($settings, $limit);
+        $this->tweets = $this->Tweets($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit);
     }
 
     /**
-     * @param array $settings
-     * @param $limit
+     * @param $oauth_access_token
+     * @param $oauth_access_token_secret
+     * @param $consumer_key
+     * @param $consumer_secret
+     * @param int $limit
      * @return mixed
      * @throws \Exception
      */
-    public function Tweets($settings = [], $limit = 0)
+    private function Tweets($oauth_access_token, $oauth_access_token_secret, $consumer_key, $consumer_secret, $limit = 5)
     {
 
         $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
         $getfield = '?screen_name=symfony&count=' . $limit;
         $requestMethod = 'GET';
 
-        $twitter = new TwitterAPIExchange($settings);
+        $twitter = new TwitterAPIExchange([
+            'oauth_access_token' => $oauth_access_token,
+            'oauth_access_token_secret' => $oauth_access_token_secret,
+            'consumer_key' => $consumer_key,
+            'consumer_secret' => $consumer_secret
+        ]);
 
         return json_decode(
 

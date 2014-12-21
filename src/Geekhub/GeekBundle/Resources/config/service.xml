@@ -15,12 +15,10 @@
 
     <services>
         <service id="tweets" class="Geekhub\GeekBundle\Service\Tweets">
-            <argument type="collection">
                 <argument key="oauth_access_token">%oauth.access.token%</argument>
                 <argument key="oauth_access_token_secret">%oauth.access.token.secret%</argument>
                 <argument key="consumer_key">%consumer.key%</argument>
                 <argument key="consumer_secret">%consumer.secret%</argument>
-            </argument>
             <argument key="limit">%tweets.limit%</argument>
         </service>
     </services>
