@@ -20,7 +20,9 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "twitter/bootstrap": "3.3.1",
         "components/jquery": "1.11.1",
-        "stof/doctrine-extensions-bundle": "~1.1@dev"
+        "stof/doctrine-extensions-bundle": "~1.1@dev",
+        "j7mbo/twitter-api-php": "dev-master",
+        "liip/url-auto-converter-bundle": "1.1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

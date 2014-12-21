@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+        http://symfony.com/schema/dic/services/services-1.0.xsd"
+        >
+
+    <parameters>
+        <parameter key="oauth.access.token">455610210-352FeTjlStWV7D3BvOMAHIInYGoTUeXFClLJ9AEE</parameter>
+        <parameter key="oauth.access.token.secret">k8FhUxGNmNu5z6AiVlXlgRdvMTIAJqSg4K8aCcmzoaTR4</parameter>
+        <parameter key="consumer.key">Ybni96J4sQuaFfs5KehqP1tZB</parameter>
+        <parameter key="consumer.secret">7LqZ87WnpYELIUbPuNI6rJistDdZJn7tfp0pYiPdgKQJQ8twCD</parameter>
+        <parameter key="tweets.limit">5</parameter>
+    </parameters>
+
+    <services>
+        <service id="tweets" class="Geekhub\GeekBundle\Service\Tweets">
+                <argument key="oauth_access_token">%oauth.access.token%</argument>
+                <argument key="oauth_access_token_secret">%oauth.access.token.secret%</argument>
+                <argument key="consumer_key">%consumer.key%</argument>
+                <argument key="consumer_secret">%consumer.secret%</argument>
+            <argument key="limit">%tweets.limit%</argument>
+        </service>
+    </services>
+</container>
