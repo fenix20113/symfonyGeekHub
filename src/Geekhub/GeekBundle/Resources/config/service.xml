@@ -18,7 +18,11 @@
         <service id="geekhub.form.type.article" class="Geekhub\GeekBundle\Form\Type\ArticleType">
 
         </service>
-        
+
+        <service id="geekhub.form.type.comment" class="Geekhub\GeekBundle\Form\Type\CommentType">
+
+        </service>
+
         <service id="tweets" class="Geekhub\GeekBundle\Service\Tweets">
                 <argument key="oauth_access_token">%oauth.access.token%</argument>
                 <argument key="oauth_access_token_secret">%oauth.access.token.secret%</argument>

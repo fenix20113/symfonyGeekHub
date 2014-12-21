@@ -3,8 +3,6 @@
 namespace Geekhub\GeekBundle\Controller;
 
 use Geekhub\GeekBundle\Entity\Comment;
-use Geekhub\GeekBundle\Form\Type\ArticleType;
-use Geekhub\GeekBundle\Form\Type\CommentType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,11 +30,11 @@ class ArticleController extends Controller
             $em->persist($article);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('notice','The item has been created successfully!');
+            $this->get('session')->getFlashBag()->add('notice', 'The item has been created successfully!');
             return $this->redirect($this->generateUrl('_articles'));
         }
 
-        return $this->render("GeekhubGeekBundle:Articles:edit_article.html.twig" , [
+        return $this->render("GeekhubGeekBundle:Articles:edit_article.html.twig", [
             'form' => $form->createView(),
         ]);
 
@@ -52,19 +50,19 @@ class ArticleController extends Controller
 
         $repository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Article');
         $article = $repository->findOneBySlug($slug);
-        $form = $this->createForm(new ArticleType(), $article);
+        $form = $this->createForm($this->get('geekhub.form.type.article'), $article);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($article);
             $em->flush();
-            $this->get('session')->getFlashBag()->add('notice','The item has been updated successfully!');
+            $this->get('session')->getFlashBag()->add('notice', 'The item has been updated successfully!');
 
             return $this->redirect($this->generateUrl('_articles'));
         }
 
-        return $this->render("GeekhubGeekBundle:Articles:edit_article.html.twig" , [
+        return $this->render("GeekhubGeekBundle:Articles:edit_article.html.twig", [
             'form' => $form->createView(),
         ]);
 
@@ -82,7 +80,7 @@ class ArticleController extends Controller
         $em->remove($article);
         $em->flush();
 
-        $this->get('session')->getFlashBag()->add('notice','The item "' . $article->getTitle() . '" has been removed successfully!');
+        $this->get('session')->getFlashBag()->add('notice', 'The item "' . $article->getTitle() . '" has been removed successfully!');
         return $this->redirect($this->generateUrl('_articles'));
     }
 
@@ -100,7 +98,7 @@ class ArticleController extends Controller
         $comments = $commentsRepository->findCommentForArticle($article);
 
         $comment = new Comment();
-        $form = $this->createForm( new CommentType(), $comment);
+        $form = $this->createForm($this->get('geekhub.form.type.comment'), $comment);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
