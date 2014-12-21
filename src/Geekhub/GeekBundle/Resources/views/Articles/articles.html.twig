@@ -48,9 +48,7 @@
 
         <div id="right-sidebar" class="col-lg-4">
             {% block RightSidebar %}
-                {{ render(controller(
-               'GeekhubGeekBundle:Tweets:show'
-                )) }}
+               {% include '@GeekhubGeek/Twitter/tweets_sidebar.html.twig' %}
             {% endblock %}
         </div>
 

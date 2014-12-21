@@ -20,6 +20,12 @@ class ArticlesController extends Controller
         $repository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Article');
         $articles = $repository->findAll();
 
-        return $this->render('GeekhubGeekBundle:Articles:articles.html.twig', array('data' => $articles));
+        $tweets = $this->get('tweets')->getTweets();
+
+        return $this->render('GeekhubGeekBundle:Articles:articles.html.twig', array(
+                'data' => $articles,
+                'tweets' => $tweets,
+            )
+        );
     }
 }
