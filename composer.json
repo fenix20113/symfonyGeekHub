@@ -25,7 +25,8 @@
         "liip/url-auto-converter-bundle": "1.1.*@dev"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "phpunit/phpunit": "4.4.*"
     },
     "scripts": {
         "post-root-package-install": [
