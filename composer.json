@@ -22,8 +22,7 @@
         "components/jquery": "1.11.1",
         "stof/doctrine-extensions-bundle": "~1.1@dev",
         "j7mbo/twitter-api-php": "dev-master",
-        "liip/url-auto-converter-bundle": "1.1.*@dev",
-        "phpunit/phpunit": "4.4.*"
+        "liip/url-auto-converter-bundle": "1.1.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
