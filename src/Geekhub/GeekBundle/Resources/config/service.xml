@@ -23,6 +23,10 @@
 
         </service>
 
+        <service id="geekhub.repository.article" factory-service="doctrine.orm.entity_manager" class="Geekhub\GeekBundle\Entity\ArticleRepository">
+
+        </service>
+
         <service id="tweets" class="Geekhub\GeekBundle\Service\Tweets">
                 <argument key="oauth_access_token">%oauth.access.token%</argument>
                 <argument key="oauth_access_token_secret">%oauth.access.token.secret%</argument>
