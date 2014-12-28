@@ -118,3 +118,18 @@ stof_doctrine_extensions:
             sluggable: true,
             softdeleteable: true
 
+
+
+lunetics_locale:
+  allowed_locales:
+      - en
+      - ua
+  guessing_order:
+      - query
+      - router
+      - session
+      - cookie
+      - browser
+
+
+
