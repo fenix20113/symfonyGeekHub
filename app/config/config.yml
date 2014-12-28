@@ -123,7 +123,7 @@ stof_doctrine_extensions:
 lunetics_locale:
   allowed_locales:
       - en
-      - ua
+      - uk
   guessing_order:
       - query
       - router
