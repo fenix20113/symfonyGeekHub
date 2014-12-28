@@ -1,0 +1,26 @@
+
+post:
+    actions:
+        add: "Add new article"
+        delete: "Delete"
+        edit: "Edit"
+    message:
+        delete.confirm: "Are you sure you want to delete \"%item%\" ?"
+    title: "Title"
+    text: "Text"
+    save: "Save"
+
+
+comment:
+    actions:
+        add: "Add a comment"
+
+    text: "Comment"
+    email: "Email"
+    empty: "No comments here..."
+
+twitter:
+    latest.tweets: "Latest Tweets"
+
+actions:
+    back: "Back"

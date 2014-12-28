@@ -1,19 +1,28 @@
 
 _articles:
-    path:     /articles
-    defaults: { _controller: GeekhubGeekBundle:Articles:show }
+    path:     /articles/{_locale}
+    defaults: { _controller: GeekhubGeekBundle:Articles:show, _locale: en }
+    requirements:
+        _locale: en|ua
 
 _article:
-    path:     /article/{slug}
-    defaults: { _controller: GeekhubGeekBundle:Article:show }
+    path:     /article/{slug}/{_locale}
+    defaults: { _controller: GeekhubGeekBundle:Article:show, _locale: en }
+    requirements:
+       _locale: en|ua
 
 _createArticle:
-    path:     /create/article
-    defaults: { _controller: GeekhubGeekBundle:Article:create }
+    path:     /create/article/{_locale}
+    defaults: { _controller: GeekhubGeekBundle:Article:create, _locale: en }
+    requirements:
+        _locale: en|ua
+
 
 _editArticle:
-    path:     /article/{slug}/edit
-    defaults: { _controller: GeekhubGeekBundle:Article:update}
+    path:     /article/{slug}/edit/{_locale}
+    defaults: { _controller: GeekhubGeekBundle:Article:update, _locale: en}
+    requirements:
+        _locale: en|ua
 
 _deleteArticle:
     path:     /article/{slug}/delete

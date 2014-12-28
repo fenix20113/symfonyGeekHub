@@ -5,7 +5,7 @@
 {% block content %}
 
     <a href="{{ path('_articles') }}">
-        <h2>Go to all posts</h2>
+        <h2>{% trans %} actions.back {% endtrans %}</h2>
     </a>
 
     <div id="post">
@@ -21,9 +21,13 @@
                         {{ data.created|date('d.m.Y H:i') }}
                     </span>
 
-                <a href="{{ path('_editArticle', { 'slug': data.slug }) }}">Edit</a>
+                <a href="{{ path('_editArticle', { 'slug': data.slug }) }}">
+                    {% trans %} post.actions.edit {% endtrans %}
+                </a>
                 <a href="{{ path('_deleteArticle', { 'slug': data.slug }) }}"
-                   onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>Delete</a>
+                   onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>
+                    {% trans %} post.actions.delete {% endtrans %}
+                </a>
 
             </div>
 
@@ -46,7 +50,7 @@
             </div>
 
             <div class="{% if not form.body.vars.valid %} has-error {% endif %} form-group">
-                {{ form_label(form.mail, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
+                {{ form_label(form.body, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
                 {{ form_widget(form.body , {'attr' : {'class' : 'form-control input-lg' }}) }}
             </div>
 
@@ -57,7 +61,7 @@
         <div id="comments">
 
             {% if comments is empty %}
-                <p class="alert alert-info">No comments here...</p>
+                <p class="alert alert-info">{% trans %} comment.empty {% endtrans %}</p>
             {% else %}
 
                 <ul class="list-group">
