@@ -14,9 +14,9 @@ class CommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('body', 'textarea', ['label' => 'Comment'])
-            ->add('mail', 'email', ['label' => 'Email'])
-            ->add('save', 'submit', ['label' => 'Add a comment']);
+            ->add('body', 'textarea', ['label' => 'comment.text'])
+            ->add('mail', 'email', ['label' => 'comment.email'])
+            ->add('save', 'submit', ['label' => 'comment.actions.add']);
     }
 
     public function getName()

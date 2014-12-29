@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: "%locale%" }
+    translator:      { fallback: "%locale%" }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -117,4 +117,21 @@ stof_doctrine_extensions:
             timestampable: true,
             sluggable: true,
             softdeleteable: true
+
+
+
+lunetics_locale:
+  allowed_locales:
+      - en
+      - uk
+  guessing_order:
+      - query
+      - router
+      - session
+      - cookie
+      - browser
+  switcher:
+      show_current_locale: true
+
+
 

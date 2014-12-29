@@ -2,16 +2,12 @@
 
 {% block title %}Symfony - My first custom bundle{% endblock %}
 
-  {% block content_header %}
-      <h2>Wall</h2>
-  {% endblock %}
-
     {% block content %}
 
         <div class="add_post">
             <a class="btn btn-primary" href="{{ path('_createArticle') }}">
                 <span class="glyphicon glyphicon-pencil"></span>
-                Add post
+                {% trans %} post.actions.add {% endtrans %}
             </a>
         </div>
 
@@ -19,7 +15,7 @@
             <div id="posts_list">
 
                 {% if data is empty %}
-                    <p class="alert alert-info">No posts here...</p>
+                    <p class="alert alert-info"> {% trans %} comment.empty {% endtrans %} </p>
                 {% else %}
 
                     {% for article in data %}
@@ -28,7 +24,7 @@
                                 <h2>{{ article.title|trim|title }}</h2>
                             </a>
 
-                            <p>{{ article.text|trim|capitalize }}</p>
+                            <p>{{ article.text|trim|capitalize|summary(300)|raw }}</p>
 
                             <div>
 
