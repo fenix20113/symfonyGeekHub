@@ -2,7 +2,9 @@
 
 namespace Geekhub\GeekBundle\Controller;
 
+use Geekhub\GeekBundle\Entity\Comment;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Geekhub\GeekBundle\Entity\Article;
 
@@ -12,6 +14,7 @@ use Geekhub\GeekBundle\Entity\Article;
  */
 class ArticleController extends Controller
 {
+
     /**
      * @return Response
      */
@@ -45,13 +48,43 @@ class ArticleController extends Controller
     }
 
     /**
-     * @return Response
+     * @param Request $request
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function showAction()
+    public function showAction(Request $request, $id)
     {
         $repository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Article');
-        $articles = $repository->findAll();
+        $article = $repository->find($id);
 
-        return $this->render('GeekhubGeekBundle:Articles:articles.html.twig', array('data' => $articles));
+        $commentsRepository = $this->getDoctrine()->getRepository('GeekhubGeekBundle:Comment');
+        $comments = $commentsRepository->findCommentForArticle($article);
+
+
+        $comment = new Comment();
+        $form = $this->createFormBuilder($comment)
+            ->add('body', 'textarea', ['label' => 'Comment'])
+            ->add('mail', 'text', ['label' => 'Email'])
+            ->add('save', 'submit', ['label' => 'Add a comment',])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $comment->setCreated(new \DateTime(date('Y-m-d H:i:s')));
+            $comment->setArticle($article);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($comment);
+            $em->flush();
+            return $this->redirect($this->generateUrl('_article', ['id' => $id]));
+        }
+
+        return $this->render('GeekhubGeekBundle:Articles:article.html.twig', [
+            'data' => $article,
+            'form' => $form->createView(),
+            'comments' => $comments
+        ]);
     }
-}
+
+
+} 

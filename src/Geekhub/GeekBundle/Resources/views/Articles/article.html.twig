@@ -1,0 +1,64 @@
+{% extends 'GeekhubGeekBundle::base.html.twig' %}
+
+{% block title %}Symfony - My first custom bundle{% endblock %}
+
+{% block content %}
+
+    <a href="{{ path('_articles') }}">
+        <h2>Go to all posts</h2>
+    </a>
+
+    <div id="post">
+
+        <div>
+            <h2>{{ data.title|trim|title }}</h2>
+
+            <p>{{ data.text|trim|capitalize }}</p>
+
+            <div>
+                    <span class="created">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                        {{ data.created|date('d.m.Y H:i') }}
+                    </span>
+
+                <a href="{{ path('_deleteArticle', { 'id': data.id }) }}">Delete</a>
+
+            </div>
+
+            {{ form_start(form) }}
+            {{ form_row(form.mail , {'attr' : {'class' : 'form-control input-lg input' }}) }}
+            {{ form_row(form.body , {'attr' : {'class' : 'form-control input-lg' }}) }}
+            {{ form_row(form.save , {'attr' : {'class' : 'btn btn-primary' }}) }}
+            {{ form_end(form) }}
+
+        </div>
+        <div id="comments">
+
+            {% if comments is empty %}
+                <p class="alert alert-info">No comments here...</p>
+            {% else %}
+
+                <ul class="list-group">
+
+                    {% for comment in comments %}
+                        <li class="list-group-item">
+                            <div class="list-group-item-heading">
+                                <span class="user">User:</span>
+                                <span>{{ comment.mail }}</span>
+                               <span class="created">
+                                      <i class="glyphicon glyphicon-calendar"></i>
+                                   {{ comment.created|date('m/d/Y h:i A') }}
+                               </span>
+                            </div>
+                            <div>{{ comment.body }}</div>
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

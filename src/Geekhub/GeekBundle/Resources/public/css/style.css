@@ -1,5 +1,9 @@
+
 .label span {
     padding-right: 5px;
+}
+input {
+    border-width: 1px;
 }
 
 .created {
@@ -21,4 +25,33 @@
 
 .add_post {
     margin-bottom: 20px;
+}
+
+#post label {
+    display: block;
+}
+
+#post textarea {
+    resize: none;
+    width: 100%;
+}
+
+#comments {
+    margin-top: 20px;
+}
+
+#comments li {
+    list-style-type: none;
+}
+
+#comments li div {
+
+}
+
+#form_save {
+    margin-top: 15px;
+}
+
+.user {
+    font-style: italic;
 }

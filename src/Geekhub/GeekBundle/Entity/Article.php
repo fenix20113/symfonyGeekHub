@@ -1,13 +1,13 @@
 <?php
 
-
-
 namespace Geekhub\GeekBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Geekhub\GeekBundle\Entity\ArticleRepository")
  * @ORM\Table(name="articles", indexes={
  *  @ORM\Index(name="article_idx", columns={"id"})
  * })
@@ -37,6 +37,17 @@ class Article
      * @ORM\Column (type="datetime")
      */
     protected $created;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
+     */
+    protected $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -115,5 +126,38 @@ class Article
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Add comments
+     *
+     * @param \Geekhub\GeekBundle\Entity\Comment $comments
+     * @return Article
+     */
+    public function addComment(\Geekhub\GeekBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Geekhub\GeekBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Geekhub\GeekBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
