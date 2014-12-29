@@ -24,7 +24,7 @@
                                 <h2>{{ article.title|trim|title }}</h2>
                             </a>
 
-                            <p>{{ article.text|trim|capitalize }}</p>
+                            <p>{{ article.text|trim|capitalize|summary(300)|raw }}</p>
 
                             <div>
 
