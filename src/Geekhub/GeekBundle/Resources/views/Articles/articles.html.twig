@@ -19,7 +19,7 @@
             <div id="posts_list">
 
                 {% if data is empty %}
-                    <p class="alert alert-info">No posts here...</p>
+                    <p class="alert alert-info"> {% trans %} comment.empty {% endtrans %} </p>
                 {% else %}
 
                     {% for article in data %}

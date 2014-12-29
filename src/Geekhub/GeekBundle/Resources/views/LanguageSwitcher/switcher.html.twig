@@ -1,0 +1,17 @@
+<div id="language">
+    <form action="/" method="get" onchange="window.location.href = languages.value">
+        <label for="languages">
+            {{ ("language.switch")|trans }}
+        </label>
+        <select id="languages" name="languages">
+            {% for locale in locales %}
+                {# The locale is current, if the current_locale starts with it. #}
+                {% if locale.locale == current_locale|slice(0, locale.locale|length) %}
+                    <option selected="selected" value="{{ locale.link }}">{{ locale.locale_current_language }}</option>
+                {% else %}
+                    <option value="{{ locale.link }}">{{ locale.locale_target_language }} ({{ locale.locale_current_language }})</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </form>
+</div>

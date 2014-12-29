@@ -18,14 +18,15 @@ input {
     height: 19px;
 }
 
-.block.container {
-    overflow: hidden;
+.page-header .container > div {
+    float: left;
+}
+.page-header .container #switcher {
+    float: right;
 }
 
-.page-header #header-container {
-    width: 970px;
-    padding: 0 15px;
-    margin: 0 auto;
+.block.container {
+    overflow: hidden;
 }
 
 .add_post {
