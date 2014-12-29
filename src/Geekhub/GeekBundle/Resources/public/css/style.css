@@ -7,6 +7,7 @@ label.required:after {
 .label span {
     padding-right: 5px;
 }
+
 input {
     border-width: 1px;
 }
@@ -18,15 +19,13 @@ input {
     height: 19px;
 }
 
-.page-header .container > div {
-    float: left;
-}
-.page-header .container #switcher {
-    float: right;
-}
-
 .block.container {
     overflow: hidden;
+}
+
+.container h2 .glyphicon {
+    font-size: 25px;
+    margin-right: 10px;
 }
 
 .add_post {

@@ -26,11 +26,12 @@
 {% block body %}
     <div class="page-header">
         <div class="container">
-            <div>
+            <div class="col-sm-8">
                 {% block content_header %}
+                    <h2>Wall</h2>
                 {% endblock %}
             </div>
-            <div id="switcher">
+            <div id="switcher" class="col-sm-4">
                 {{ locale_switcher(null, null, 'GeekhubGeekBundle:LanguageSwitcher:switcher.html.twig') }}
             </div>
         </div>
