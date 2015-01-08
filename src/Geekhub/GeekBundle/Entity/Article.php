@@ -4,6 +4,8 @@ namespace Geekhub\GeekBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -11,6 +13,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Table(name="articles", indexes={
  *  @ORM\Index(name="article_idx", columns={"id"})
  * })
+ *
+ * @Gedmo\SoftDeleteable(fieldName="deleted", timeAware=false)
  */
 class Article
 {
@@ -21,23 +25,47 @@ class Article
      */
     protected $id;
 
-
     /**
+     * @Assert\NotBlank(message="Title field should be not blank!")
      * @ORM\Column (type="string", length=255)
      */
     protected $title;
 
     /**
+     * @Assert\NotBlank(message="Text field should be not blank!")
      * @ORM\Column (type="text")
      */
     protected $text;
 
 
     /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column (type="datetime")
      */
     protected $created;
 
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
+
+
+    /**
+     * @Gedmo\Slug(fields={"title"}, separator="-")
+     * @ORM\Column(length=128, unique=true)
+     */
+    protected $slug;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $deleted;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="article", cascade={"remove"})
@@ -57,6 +85,28 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+
+    public function getDeleted()
+    {
+        $this->deleted;
+    }
+
+    public function setDeleted($deleted)
+    {
+        $this->deleted = $deleted;
+    }
+
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
@@ -106,19 +156,6 @@ class Article
     }
 
     /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Article
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
      * Get created
      *
      * @return \DateTime 
@@ -126,6 +163,16 @@ class Article
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 
     /**

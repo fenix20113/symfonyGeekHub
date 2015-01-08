@@ -4,13 +4,17 @@ _articles:
     defaults: { _controller: GeekhubGeekBundle:Articles:show }
 
 _article:
-    path:     /article/{id}
+    path:     /article/{slug}
     defaults: { _controller: GeekhubGeekBundle:Article:show }
 
 _createArticle:
     path:     /create/article
     defaults: { _controller: GeekhubGeekBundle:Article:create }
 
+_editArticle:
+    path:     /article/{slug}/edit
+    defaults: { _controller: GeekhubGeekBundle:Article:update}
+
 _deleteArticle:
-    path:     /article/{id}/delete
+    path:     /article/{slug}/delete
     defaults: { _controller: GeekhubGeekBundle:Article:delete}

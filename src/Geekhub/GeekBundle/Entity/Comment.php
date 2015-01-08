@@ -4,6 +4,7 @@ namespace Geekhub\GeekBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -23,29 +24,44 @@ class Comment
     protected $id;
 
     /**
+     * @Assert\NotBlank(message="Comment field should be not blank!")
      * @ORM\Column (type="string", length=255)
      */
     protected $body;
 
     /**
-     *  @Assert\Email(
+     * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
      * )
+     *
+     * @Assert\NotBlank(message="Email field should be not blank!")
      * @ORM\Column (type="string", length=255)
      */
     protected $mail;
-
-    /**
-     * @ORM\Column (type="datetime")
-     */
-    protected $created;
 
     /**
      * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
      * @ORM\JoinColumn(name="article_id", referencedColumnName="id")
      */
     protected $article;
+
+    /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column (type="datetime")
+     */
+    protected $created;
+
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    protected $updated;
 
 
     /**
@@ -105,19 +121,6 @@ class Comment
     }
 
     /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Comment
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
      * Get created
      *
      * @return \DateTime 
@@ -125,6 +128,16 @@ class Comment
     public function getCreated()
     {
         return $this->created;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
     }
 
     /**

@@ -1,6 +1,6 @@
 {% extends 'GeekhubGeekBundle::base.html.twig' %}
 
-{% block title %}Symfony - My first custom bundle{% endblock %}
+{% block title %}{{ data.title }}{% endblock %}
 
 {% block content %}
 
@@ -21,13 +21,35 @@
                         {{ data.created|date('d.m.Y H:i') }}
                     </span>
 
-                <a href="{{ path('_deleteArticle', { 'id': data.id }) }}">Delete</a>
+                <a href="{{ path('_editArticle', { 'slug': data.slug }) }}">Edit</a>
+                <a href="{{ path('_deleteArticle', { 'slug': data.slug }) }}"
+                   onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>Delete</a>
 
             </div>
 
-            {{ form_start(form) }}
-            {{ form_row(form.mail , {'attr' : {'class' : 'form-control input-lg input' }}) }}
-            {{ form_row(form.body , {'attr' : {'class' : 'form-control input-lg' }}) }}
+            {{ form_start(form , {'attr' : {'novalidate' : 'novalidate' }}) }}
+
+            {% if not form.vars.valid %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span
+                                aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    {{ form_errors(form.mail) }}
+                    {{ form_errors(form.body) }}
+
+                </div>
+            {% endif %}
+
+            <div class="{% if not form.mail.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.mail, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
+                {{ form_widget(form.mail , {'attr' : {'class' : ' form-control input-lg input' }}) }}
+            </div>
+
+            <div class="{% if not form.body.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.mail, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
+                {{ form_widget(form.body , {'attr' : {'class' : 'form-control input-lg' }}) }}
+            </div>
+
             {{ form_row(form.save , {'attr' : {'class' : 'btn btn-primary' }}) }}
             {{ form_end(form) }}
 

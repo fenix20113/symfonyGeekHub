@@ -15,7 +15,7 @@ class CommentRepository extends EntityRepository
      * @param Article $article
      * @return array
      */
-    public function findCommentForArticle(Article $article)
+    public function findCommentForArticle( $article)
     {
         $query = $this->getEntityManager()
             ->createQuery('SELECT com FROM GeekhubGeekBundle:Comment com WHERE com.article = :article_id');
