@@ -27,7 +27,7 @@ class LoadArticleData implements FixtureInterface
                 $comment->setMail('example@mail.com');
                 $manager->persist($comment);
             }
-            
+
             $manager->persist($article);
         }
         $manager->flush();

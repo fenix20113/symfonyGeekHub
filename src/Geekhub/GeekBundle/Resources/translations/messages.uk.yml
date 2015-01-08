@@ -21,3 +21,6 @@ actions:
     back: "Назад"
 
 language.switch: "Мова:"
+
+Next: "Наступна"
+Previous: "Попередня"
