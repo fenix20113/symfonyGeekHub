@@ -27,7 +27,8 @@
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
-        "phpunit/phpunit": "4.4.*"
+        "phpunit/phpunit": "4.4.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*@dev"
     },
     "scripts": {
         "post-root-package-install": [
