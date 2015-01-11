@@ -17,10 +17,19 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "twitter/bootstrap": "3.3.1",
+        "components/jquery": "1.11.1",
+        "stof/doctrine-extensions-bundle": "~1.1@dev",
+        "j7mbo/twitter-api-php": "dev-master",
+        "liip/url-auto-converter-bundle": "1.1.*@dev",
+        "lunetics/locale-bundle": "~2.3",
+        "knplabs/knp-paginator-bundle": "2.4.1"
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "phpunit/phpunit": "4.4.*",
+        "doctrine/doctrine-fixtures-bundle": "2.2.*@dev"
     },
     "scripts": {
         "post-root-package-install": [

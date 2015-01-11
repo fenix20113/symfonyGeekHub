@@ -1,0 +1,90 @@
+{% extends 'GeekhubGeekBundle::base.html.twig' %}
+
+{% block title %}{{ data.title }}{% endblock %}
+
+{% block content %}
+
+    <a href="{{ path('_articles') }}">
+        <h2><span class="glyphicon-arrow-left glyphicon"></span>{% trans %} actions.back {% endtrans %}</h2>
+    </a>
+
+    <div id="post">
+
+        <div>
+            <h2>{{ data.title|trim|title }}</h2>
+
+            <p>{{ data.text|trim|capitalize }}</p>
+
+            <div>
+                    <span class="created">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                        {{ data.created|date('d.m.Y H:i') }}
+                    </span>
+
+                <a href="{{ path('_editArticle', { 'slug': data.slug }) }}">
+                    {% trans %} post.actions.edit {% endtrans %}
+                </a>
+                <a href="{{ path('_deleteArticle', { 'slug': data.slug }) }}"
+                   onclick='return confirm("Are you sure you want to delete \"{{ data.title }}\" ?")'>
+                    {% trans %} post.actions.delete {% endtrans %}
+                </a>
+
+            </div>
+
+            {{ form_start(form , {'attr' : {'novalidate' : 'novalidate' }}) }}
+
+            {% if not form.vars.valid %}
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span
+                                aria-hidden="true">&times;</span><span
+                                class="sr-only">Close</span></button>
+                    {{ form_errors(form.mail) }}
+                    {{ form_errors(form.body) }}
+
+                </div>
+            {% endif %}
+
+            <div class="{% if not form.mail.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.mail, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
+                {{ form_widget(form.mail , {'attr' : {'class' : ' form-control input-lg input' }}) }}
+            </div>
+
+            <div class="{% if not form.body.vars.valid %} has-error {% endif %} form-group">
+                {{ form_label(form.body, label|default(null), {'label_attr' : { 'class' : 'control-label'} }) }}
+                {{ form_widget(form.body , {'attr' : {'class' : 'form-control input-lg' }}) }}
+            </div>
+
+            {{ form_row(form.save , {'attr' : {'class' : 'btn btn-primary' }}) }}
+            {{ form_end(form) }}
+
+        </div>
+        <div id="comments">
+
+            {% if comments is empty %}
+                <p class="alert alert-info">{% trans %} comment.empty {% endtrans %}</p>
+            {% else %}
+
+                <ul class="list-group">
+
+                    {% for comment in comments %}
+                        <li class="list-group-item">
+                            <div class="list-group-item-heading">
+                                <span class="user">User:</span>
+                                <span>{{ comment.mail }}</span>
+                               <span class="created">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                   {{ comment.created|date('m/d/Y h:i A') }}
+                               </span>
+                            </div>
+                            <div>{{ comment.body }}</div>
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
