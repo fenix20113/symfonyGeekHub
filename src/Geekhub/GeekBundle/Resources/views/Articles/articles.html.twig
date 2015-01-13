@@ -1,0 +1,54 @@
+{% extends 'GeekhubGeekBundle::base.html.twig' %}
+
+{% block title %}Symfony - My first custom bundle{% endblock %}
+
+    {% block content %}
+
+        <div class="add_post">
+            <a class="btn btn-primary" href="{{ path('_createArticle') }}">
+                <span class="glyphicon glyphicon-pencil"></span>
+                {% trans %} post.actions.add {% endtrans %}
+            </a>
+        </div>
+
+        <div id="main" class="col-lg-8">
+            <div id="posts_list">
+
+                {% if data is empty %}
+                    <p class="alert alert-info"> {% trans %} comment.empty {% endtrans %} </p>
+                {% else %}
+
+                    {% for article in data %}
+                        <div>
+                            <a href="{{ path('_article', { 'slug': article.slug }) }}">
+                                <h2>{{ article.title|trim|title }}</h2>
+                            </a>
+
+                            <p>{{ article.text|trim|capitalize|summary(300)|raw }}</p>
+
+                            <div>
+
+                            <span class="created">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                                {{ article.created|date('d.m.Y H:i') }}
+                            </span>
+
+                            </div>
+
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+            </div>
+            <div class="navigation text-center">
+                {{ knp_pagination_render(data) }}
+            </div>
+        </div>
+
+        <div id="right-sidebar" class="col-lg-4">
+            {% block RightSidebar %}
+               {% include '@GeekhubGeek/Twitter/tweets_sidebar.html.twig' %}
+            {% endblock %}
+        </div>
+
+    {% endblock %}
